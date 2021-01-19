@@ -66,7 +66,7 @@ http://127.0.0.1:5000/process-payment
 
 ## Testing - Unit Test
 
-1.) Move/Navigate to tests folder from root folder
+1.) Move/Navigate to tests folder from root folder in a new Terminal
 
 ```bash
 cd tests
