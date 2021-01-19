@@ -1,6 +1,6 @@
 # Filed Payments
 
-#### Coding Problem to built a web API in flask to mimic simple payment processing
+#### Coding Problem to built a web API in flask on simple payment processing
 
 ## Problem Statement
 
