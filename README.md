@@ -34,19 +34,31 @@ cd filed-payments
 python -m venv env
 ```
 
-4.) Use the package manager [pip](https://pip.pypa.io/en/stable/) to install requirements.
+4.) Activate Virtual Environment
+
+#### Windows
+```
+./env/Scripts/Activate
+```
+
+#### Linux/MacOS
+```
+source env/bin/activate
+```
+
+5.) Use the package manager [pip](https://pip.pypa.io/en/stable/) to install requirements.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-5.) Run the Flask server
+6.) Run the Flask server
 
 ```bash
 python run.py
 ```
 
-6.) API endpoint
+7.) API endpoint
 
 ```bash
 http://127.0.0.1:5000/process-payment
