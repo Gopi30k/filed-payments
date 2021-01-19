@@ -1,3 +1,9 @@
+"""
+    Author: Gopi Krishnan
+    Description: Utlities for Payments    
+    This Module holds CreditCard class which instantiates and validates card details acquired from API Request
+"""
+
 import re
 import datetime
 from .errors import InvalidCreditCard
@@ -8,23 +14,26 @@ class CreditCard():
     """
 
     def __init__(self, CreditCardNumber, CardHolder, ExpirationDate, Amount, SecurityCode=None):
-        # breakpoint()
         self.creditCardNumber = CreditCardNumber
         self.cardHolder = CardHolder
         self.expirationDate = ExpirationDate
         self.securityCode = SecurityCode
         self.amount = Amount
 
-    def validate_card_number(self, no: str):
-        """Validate Card Number
+    def validate_card_number(self, num: str):
+        """Validate Card Number using Regex Constraints:
+
+            * No character/string 
+            * 13 to 16 digits only
+            * Number starts with only 3/4/5/6  (by standard credit card format convention) 
 
         Args:
-            no ([str]): [description]
+            num ([str]): [Credit Card Number as string]
 
         Returns:
             [boolean]: [valid:False, Invalid: True]
         """
-        return not(bool(re.match(r'^[456][0-9]{12}(?:[0-9]{3})?$', no)))
+        return not(bool(re.match(r'^[3456][0-9]{12}(?:[0-9]{3})?$', num)))
 
     # Getter and Setter for CreditCardNumber
     @property
@@ -32,13 +41,13 @@ class CreditCard():
         return self._creditCardNumber
 
     @creditCardNumber.setter
-    def creditCardNumber(self, cdNo):
-        if not(isinstance(cdNo, str)) or self.validate_card_number(cdNo):
+    def creditCardNumber(self, cdNum):
+        if not(isinstance(cdNum, str)) or self.validate_card_number(cdNum):
             errMsg = """CreditCard Number '{cardNumber}' is Invalid""".format(
-                cardNumber=cdNo)
+                cardNumber=cdNum)
             raise InvalidCreditCard(errMsg)
         else:
-            self._creditCardNumber = cdNo
+            self._creditCardNumber = cdNum
 
     # Getter and Setter for CardHolder
 
@@ -94,9 +103,6 @@ class CreditCard():
             raise InvalidCreditCard("Invalid Security Code")
         else:
             self._securityCode = sCode
-
-    # def __str__(self):
-    #     return " Card Details :\n CreditCardNumber {cardNo} \n CardHolderName {name} \n ExpirationDate {expDate} \n Amount {amt} \n".format(cardNo=self._creditCardNumber, name=self._cardHolder, expDate=self._expirationDate, amt=self._amount)
 
     def __repr__(self):
         return """CreditCard(CreditCardNumber={cardNo}, CardHolder={name}, ExpirationDate={expDate}, Amount={amt})""".format(cardNo=self._creditCardNumber, name=self._cardHolder, expDate=self._expirationDate, amt=self._amount)
